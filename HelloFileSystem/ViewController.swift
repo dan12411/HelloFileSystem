@@ -41,16 +41,18 @@ class ViewController: UIViewController {
         // 1. 找出原來檔案路徑
         let path = NSTemporaryDirectory() + "saveArray.txt"
         
-        // 2. 要拷貝檔案的路徑(Documents前不加斜線！！！)
-        let copyToThisPath = NSHomeDirectory() + "Documents/ArrayBackUp.txt"
+        // 2. 要拷貝檔案的路徑
+        let copyToThisPath = NSHomeDirectory() + "/Documents/ArrayBackUp.txt"
         
         // 3. 要移動檔案的路徑
         let moveToThisPath = NSHomeDirectory() + "/Documents/saveArray.txt"
         
         // 4. 用FileManager 來移動或拷貝檔案
+        // 5. 新增錯誤處理2016.10.12
         do {
             try FileManager.default.copyItem(atPath: path, toPath: copyToThisPath)
-        } catch {
+        } catch let error as NSError {
+            print(error.localizedDescription)
             print("Can not copy file")
         }
         
