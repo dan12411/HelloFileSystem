@@ -30,11 +30,27 @@ class ViewController: UIViewController {
 //        checkOutTmp()
 //        checkOutIfItsFolder()
 //        moveOrCopy()
-        let copyToThisPath = NSHomeDirectory() + "/Documents/ArrayBackUp.txt"
-        if let loadArray = NSArray(contentsOfFile: copyToThisPath) as? [String] {
-            print(loadArray)
-        }
+//        let copyToThisPath = NSHomeDirectory() + "/Documents/ArrayBackUp.txt"
+//        if let loadArray = NSArray(contentsOfFile: copyToThisPath) as? [String] {
+//            print(loadArray)
+//        }
+//        let moveToThisPath = NSHomeDirectory() + "/Documents/saveArray.txt"
+//        if let loadArray = NSArray(contentsOfFile: moveToThisPath) as? [String] {
+//            print(loadArray)
+//        }
+        
 
+    }
+    
+    func deleteFile() {
+        // 1. 找出原來檔案路徑
+        let path = NSHomeDirectory() + "/Documents/saveArrayAgain.txt"
+        // 2. 用FileManager 來刪除檔案
+        do {
+            try FileManager.default.removeItem(atPath: path)
+        } catch {
+            
+        }
     }
     
     func moveOrCopy() {
@@ -58,7 +74,8 @@ class ViewController: UIViewController {
         
         do {
             try FileManager.default.moveItem(atPath: path, toPath: moveToThisPath)
-        } catch {
+        } catch let error as NSError{
+            print(error.localizedDescription)
             print("Can not move file")
         }
     }
